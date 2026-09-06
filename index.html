@@ -13,16 +13,9 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --brand:#33afe2;
-  --brand-soft:rgba(51,175,226,.14);
-  --bg:#070b10;
-  --bg2:#0c131b;
-  --card:#111a24;
-  --line:rgba(255,255,255,.08);
-  --txt:#e8f1f7;
-  --mut:#8aa0b0;
-  --warn:#ffcc4d;
-  --ok:#5ce6a5;
+  --brand:#33afe2;--brand-soft:rgba(51,175,226,.14);--bg:#070b10;--bg2:#0c131b;
+  --card:#111a24;--line:rgba(255,255,255,.08);--txt:#e8f1f7;--mut:#8aa0b0;
+  --ok:#5ce6a5;--warn:#ffcc4d;
   --font:'Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
   --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
 }
@@ -31,7 +24,6 @@ body{background:var(--bg);color:var(--txt);font-family:var(--font);overflow-x:hi
 body.lock{overflow:hidden}
 ::selection{background:var(--brand);color:#04121a}
 
-/* ---------- BOOT ---------- */
 #boot{position:fixed;inset:0;z-index:9999;background:#04080c;display:flex;align-items:center;justify-content:center;padding:1.5rem;transition:opacity .7s ease,visibility .7s}
 #boot.done{opacity:0;visibility:hidden}
 .term{width:min(680px,100%);background:#080e14;border:1px solid var(--line);border-radius:14px;box-shadow:0 30px 90px rgba(0,0,0,.7);overflow:hidden}
@@ -43,38 +35,40 @@ body.lock{overflow:hidden}
 .term-body b{color:var(--ok);font-weight:600}
 .cursor{display:inline-block;width:9px;height:1.05em;background:var(--brand);vertical-align:-2px;animation:bl .9s steps(2) infinite}
 @keyframes bl{50%{opacity:0}}
-.skip{display:block;margin:1rem auto 0;background:none;border:1px solid var(--line);color:var(--mut);padding:.45rem 1rem;border-radius:99px;font:.78rem var(--mono);cursor:pointer}
+.boot-actions{display:flex;gap:.5rem;justify-content:center;margin-top:1rem;flex-wrap:wrap}
+.skip{background:none;border:1px solid var(--line);color:var(--mut);padding:.45rem 1rem;border-radius:99px;font:.78rem var(--mono);cursor:pointer}
 .skip:hover{color:var(--brand);border-color:var(--brand)}
 
-/* ---------- FX ---------- */
 .blob{position:fixed;border-radius:50%;filter:blur(90px);opacity:.32;pointer-events:none;z-index:0}
 .b1{width:520px;height:520px;background:var(--brand);top:-180px;left:-160px}
 .b2{width:440px;height:440px;background:#7b5cff;bottom:-160px;right:-140px;opacity:.22}
 .emo{position:fixed;font-size:1.5rem;opacity:.16;pointer-events:none;z-index:0;animation:fl linear infinite}
 @keyframes fl{0%{transform:translateY(105vh) rotate(0)}100%{transform:translateY(-15vh) rotate(360deg)}}
 
-/* ---------- NAV ---------- */
-nav{position:fixed;top:0;left:0;right:0;z-index:80;display:flex;justify-content:space-between;align-items:center;padding:.9rem 1.5rem;background:rgba(7,11,16,.72);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-.logo{font-weight:800;letter-spacing:.04em;font-size:1.05rem}
+nav{position:fixed;top:0;left:0;right:0;z-index:80;display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.85rem 1.3rem;background:rgba(7,11,16,.72);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.logo{font-weight:800;letter-spacing:.04em;font-size:1.05rem;white-space:nowrap}
 .logo i{font-style:italic;font-weight:400;font-size:.78rem;color:var(--brand);letter-spacing:.12em}
-.nav-r{font:.75rem var(--mono);color:var(--mut);display:flex;align-items:center;gap:.5rem}
+.nav-r{display:flex;align-items:center;gap:1rem}
+.status{font:.75rem var(--mono);color:var(--mut);display:flex;align-items:center;gap:.5rem}
 .pulse{width:8px;height:8px;border-radius:50%;background:var(--ok);animation:pp 1.6s infinite}
 @keyframes pp{0%,100%{box-shadow:0 0 0 0 rgba(92,230,165,.6)}70%{box-shadow:0 0 0 9px rgba(92,230,165,0)}}
+.langs{display:flex;gap:.25rem;background:rgba(255,255,255,.05);border:1px solid var(--line);border-radius:99px;padding:.22rem}
+.langs button{background:none;border:none;color:var(--mut);font:600 .74rem var(--mono);padding:.32rem .6rem;border-radius:99px;cursor:pointer;transition:.2s;letter-spacing:.05em}
+.langs button:hover{color:var(--txt)}
+.langs button.on{background:var(--brand);color:#04121a}
 .progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--brand),#7b5cff);z-index:90;width:0}
 
-/* ---------- LAYOUT ---------- */
 section{position:relative;z-index:2;padding:6rem 1.5rem;max-width:1120px;margin:0 auto}
 .kick{font:.74rem var(--mono);color:var(--brand);letter-spacing:.22em;text-transform:uppercase;margin-bottom:.9rem}
 h2{font-size:clamp(1.8rem,4.4vw,2.9rem);line-height:1.12;letter-spacing:-.02em;margin-bottom:1rem;font-weight:800}
 h2 em{font-style:normal;color:var(--brand)}
 .lead{color:var(--mut);max-width:62ch;font-size:1.02rem}
 
-/* ---------- HERO ---------- */
-.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-top:7rem}
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-top:7.5rem}
 .hi{display:inline-flex;align-items:center;gap:.5rem;background:var(--brand-soft);border:1px solid rgba(51,175,226,.35);color:var(--brand);padding:.4rem 1rem;border-radius:99px;font:.78rem var(--mono);margin-bottom:1.6rem;width:fit-content}
-.hero h1{font-size:clamp(2.4rem,7.5vw,5.2rem);line-height:1.02;letter-spacing:-.035em;font-weight:800;margin-bottom:1.4rem}
+.hero h1{font-size:clamp(2.2rem,7vw,5rem);line-height:1.03;letter-spacing:-.035em;font-weight:800;margin-bottom:1.4rem}
 .hero h1 .nm{background:linear-gradient(100deg,var(--brand),#8ee4ff 55%,#7b5cff);-webkit-background-clip:text;background-clip:text;color:transparent}
-.rot{display:inline-block;position:relative;min-width:min(9.5em,86vw);height:1.1em;vertical-align:bottom;overflow:hidden}
+.rot{display:inline-block;position:relative;min-width:min(11em,86vw);height:1.15em;vertical-align:bottom;overflow:hidden}
 .rot span{position:absolute;left:0;top:0;white-space:nowrap;color:var(--brand);opacity:0;transform:translateY(70%);transition:.55s cubic-bezier(.2,.8,.2,1)}
 .rot span.on{opacity:1;transform:none}
 .hero p{color:var(--mut);max-width:60ch;font-size:1.08rem;margin-bottom:2.2rem}
@@ -85,17 +79,14 @@ h2 em{font-style:normal;color:var(--brand)}
 .scroll-hint{margin-top:3.5rem;font:.72rem var(--mono);color:var(--mut);animation:bob 2s ease-in-out infinite}
 @keyframes bob{50%{transform:translateY(8px)}}
 
-/* ---------- MARQUEE ---------- */
 .mq{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--bg2);padding:.9rem 0;position:relative;z-index:2}
 .mq-in{display:flex;gap:2.5rem;width:max-content;animation:mv 26s linear infinite;font:.82rem var(--mono);color:var(--mut);white-space:nowrap}
 .mq-in b{color:var(--brand);font-weight:500}
 @keyframes mv{to{transform:translateX(-50%)}}
 
-/* ---------- REVEAL ---------- */
 .rv{opacity:0;transform:translateY(34px);transition:.85s cubic-bezier(.2,.8,.2,1)}
 .rv.in{opacity:1;transform:none}
 
-/* ---------- CARDS ---------- */
 .grid{display:grid;gap:1.1rem;margin-top:2.6rem}
 .g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
 .g3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
@@ -108,13 +99,11 @@ h2 em{font-style:normal;color:var(--brand)}
 .card p{color:var(--mut);font-size:.93rem}
 .role{font:.7rem var(--mono);color:var(--brand);text-transform:uppercase;letter-spacing:.14em;margin-bottom:.7rem;display:block}
 
-/* ---------- STATS ---------- */
 .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-top:2.6rem}
 .stat{text-align:center;padding:1.6rem 1rem;background:var(--card);border:1px solid var(--line);border-radius:18px}
 .num{font-size:clamp(2rem,5vw,3rem);font-weight:800;color:var(--brand);letter-spacing:-.03em;line-height:1}
 .lbl{font:.74rem var(--mono);color:var(--mut);margin-top:.5rem;text-transform:uppercase;letter-spacing:.1em}
 
-/* ---------- PIPELINE ---------- */
 .pipe{margin-top:3rem;position:relative;padding-left:2.6rem}
 .pipe::before{content:'';position:absolute;left:11px;top:8px;bottom:8px;width:2px;background:var(--line)}
 .pipe-fill{position:absolute;left:11px;top:8px;width:2px;background:linear-gradient(var(--brand),#7b5cff);height:0;transition:height 1.6s ease}
@@ -125,14 +114,12 @@ h2 em{font-style:normal;color:var(--brand)}
 .step h4{font-size:1.05rem;margin-bottom:.25rem}
 .step p{color:var(--mut);font-size:.92rem}
 
-/* ---------- CODE ---------- */
-.code{background:#080e14;border:1px solid var(--line);border-radius:16px;padding:1.3rem;font:.84rem/1.9 var(--mono);overflow-x:auto;margin-top:2.4rem}
+.code{background:#080e14;border:1px solid var(--line);border-radius:16px;padding:1.3rem;font:.84rem/1.9 var(--mono);overflow-x:auto;margin-top:2.4rem;white-space:pre}
 .code .c{color:#5b7186}
 .code .k{color:var(--brand)}
 .code .s{color:var(--ok)}
 .code .w{color:var(--warn)}
 
-/* ---------- FAQ ---------- */
 .faq{margin-top:2.4rem;border-top:1px solid var(--line)}
 .q{border-bottom:1px solid var(--line)}
 .q button{width:100%;background:none;border:none;color:var(--txt);font:600 1rem/1.5 var(--font);text-align:left;padding:1.25rem .4rem;cursor:pointer;display:flex;justify-content:space-between;gap:1rem;align-items:center}
@@ -142,13 +129,12 @@ h2 em{font-style:normal;color:var(--brand)}
 .a{max-height:0;overflow:hidden;transition:max-height .45s ease}
 .a p{color:var(--mut);padding:0 .4rem 1.3rem;font-size:.95rem}
 
-/* ---------- FINALE ---------- */
 .finale{text-align:center;padding:7rem 1.5rem 5rem}
-.finale h2{margin-bottom:1.2rem}
+.finale .lead{margin:0 auto 2.2rem}
 footer{border-top:1px solid var(--line);padding:2.5rem 1.5rem;text-align:center;color:var(--mut);font-size:.85rem;position:relative;z-index:2}
 footer a{color:var(--brand);text-decoration:none}
 .conf{position:fixed;width:10px;height:10px;z-index:9998;pointer-events:none;border-radius:2px}
-@media(max-width:640px){section{padding:4.5rem 1.2rem}.term-body{font-size:.76rem;min-height:220px}}
+@media(max-width:720px){nav{padding:.7rem .9rem}.status{display:none}section{padding:4.5rem 1.2rem}.term-body{font-size:.74rem;min-height:230px}}
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
 </head>
@@ -159,11 +145,16 @@ footer a{color:var(--brand);text-decoration:none}
     <div class="term">
       <div class="term-bar">
         <i class="dot" style="background:#ff5f57"></i><i class="dot" style="background:#febc2e"></i><i class="dot" style="background:#28c840"></i>
-        <span class="term-title">hasi@elektronic — erklaerung-fuer-alesya.sh</span>
+        <span class="term-title" id="termTitle">hasi@elektronic — erklaerung-fuer-alesya.sh</span>
       </div>
       <div class="term-body" id="tb"></div>
     </div>
-    <button class="skip" onclick="killBoot()">überspringen &rarr;</button>
+    <div class="boot-actions">
+      <button class="skip" onclick="setLang('de',true)">🇩🇪 Deutsch</button>
+      <button class="skip" onclick="setLang('tr',true)">🇹🇷 Türkçe</button>
+      <button class="skip" onclick="setLang('ru',true)">🇷🇺 Русский</button>
+      <button class="skip" onclick="killBoot()" id="skipBtn">überspringen →</button>
+    </div>
   </div>
 </div>
 
@@ -172,248 +163,403 @@ footer a{color:var(--brand);text-decoration:none}
 
 <nav>
   <div class="logo">HASI<i> elektronic</i></div>
-  <div class="nav-r"><span class="pulse"></span> System läuft. Immer noch.</div>
+  <div class="nav-r">
+    <div class="status"><span class="pulse"></span> <span data-i="nav"></span></div>
+    <div class="langs">
+      <button data-l="de" onclick="setLang('de')">DE</button>
+      <button data-l="tr" onclick="setLang('tr')">TR</button>
+      <button data-l="ru" onclick="setLang('ru')">RU</button>
+    </div>
+  </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
-  <div class="hi">👋 Diese Seite wurde gebaut, nur um dir etwas zu erklären</div>
-  <h1>Alesya,<br>das hier ist<br><span class="nm">das System.</span></h1>
-  <p style="font-size:1.15rem;color:var(--txt);margin-bottom:.6rem">Es besteht aus
-    <span class="rot" id="rot">
-      <span class="on">einem Mann.</span><span>sehr viel Kaffee.</span><span>ein paar KI-Agenten.</span><span>Cloudflare.</span><span>Nächten ohne Schlaf.</span><span>Ideen um 23:47 Uhr.</span>
-    </span>
-  </p>
-  <p>Keine Firma mit 40 Mitarbeitern. Kein Großraumbüro. Kein Meeting über das nächste Meeting. Nur ein Laptop, ein Netzwerk aus Werkzeugen — und die feste Überzeugung, dass Warten auf jemand anderen Zeitverschwendung ist.</p>
+  <div class="hi" data-i="badge"></div>
+  <h1 data-i="h1"></h1>
+  <p style="font-size:1.15rem;color:var(--txt);margin-bottom:.6rem"><span data-i="pre"></span> <span class="rot" id="rot"></span></p>
+  <p data-i="heroP"></p>
   <div class="cta">
-    <a href="#team" class="btn p">Zeig mir das Team →</a>
-    <button class="btn" onclick="boom()">Ich glaub das nicht 🎉</button>
+    <a href="#team" class="btn p" data-i="cta1"></a>
+    <button class="btn" onclick="boom()" data-i="cta2"></button>
   </div>
-  <div class="scroll-hint">↓ runterscrollen · es wird schlimmer</div>
+  <div class="scroll-hint" data-i="hint"></div>
 </section>
 
 <div class="mq"><div class="mq-in" id="mq"></div></div>
 
-<!-- TEAM -->
 <section id="team">
   <div class="rv">
-    <div class="kick">Kapitel 1 · Die Belegschaft</div>
-    <h2>Das komplette Team.<br><em>Vollständig.</em> Alle da.</h2>
-    <p class="lead">Kein Personalmangel — es ist einfach von Anfang an so geplant gewesen. Die Weihnachtsfeier ist trotzdem gut besucht, weil drei davon keinen Platz brauchen.</p>
+    <div class="kick" data-i="k1"></div>
+    <h2 data-i="h2_1"></h2>
+    <p class="lead" data-i="l1"></p>
   </div>
   <div class="grid g2">
-    <div class="card rv">
-      <span class="ico">🧔🏻</span><span class="role">Geschäftsführer, Entwickler, Support, Buchhaltung, Putzkraft</span>
-      <h3>Hamdi</h3>
-      <p>Repariert vormittags einen PC, baut mittags eine SaaS-Plattform, schreibt abends eine Rechnung. Schläft angeblich auch. Unbestätigt.</p>
-    </div>
-    <div class="card rv">
-      <span class="ico">🤖</span><span class="role">Abteilung: alles, was tippen muss</span>
-      <h3>Die KI-Agenten</h3>
-      <p>Schreiben Code, Texte, Angebote und diese Website hier. Beschweren sich nie über Überstunden. Wollen kein Urlaubsgeld. Verlangen dafür sehr präzise Sätze.</p>
-    </div>
-    <div class="card rv">
-      <span class="ico">☁️</span><span class="role">Abteilung: Serverraum (existiert nicht)</span>
-      <h3>Cloudflare</h3>
-      <p>330 Rechenzentren weltweit. Deine Seite wird von dem Server geladen, der dir am nächsten ist. Kostet weniger als ein Döner im Monat. Ja, wirklich.</p>
-    </div>
-    <div class="card rv">
-      <span class="ico">🐙</span><span class="role">Abteilung: Gedächtnis</span>
-      <h3>GitHub</h3>
-      <p>Merkt sich jede einzelne Änderung seit Tag eins. Wenn etwas kaputtgeht: einen Knopf drücken, zurück in die Vergangenheit. Wie Strg+Z, nur für ein ganzes Unternehmen.</p>
-    </div>
+    <div class="card rv"><span class="ico">🧔🏻</span><span class="role" data-i="t1r"></span><h3 data-i="t1h"></h3><p data-i="t1p"></p></div>
+    <div class="card rv"><span class="ico">🤖</span><span class="role" data-i="t2r"></span><h3 data-i="t2h"></h3><p data-i="t2p"></p></div>
+    <div class="card rv"><span class="ico">☁️</span><span class="role" data-i="t3r"></span><h3 data-i="t3h"></h3><p data-i="t3p"></p></div>
+    <div class="card rv"><span class="ico">🐙</span><span class="role" data-i="t4r"></span><h3 data-i="t4h"></h3><p data-i="t4p"></p></div>
   </div>
 </section>
 
-<!-- STATS -->
 <section>
   <div class="rv">
-    <div class="kick">Kapitel 2 · Zahlen, die niemand geglaubt hat</div>
-    <h2>Ein bisschen <em>Angeberei</em>. Nur ganz kurz.</h2>
+    <div class="kick" data-i="k2"></div>
+    <h2 data-i="h2_2"></h2>
   </div>
   <div class="stats rv">
-    <div class="stat"><div class="num" data-to="40" data-suf="+">0</div><div class="lbl">Live-Projekte</div></div>
-    <div class="stat"><div class="num" data-to="5" data-suf="">0</div><div class="lbl">Apps im Store</div></div>
-    <div class="stat"><div class="num" data-to="1986" data-suf="">0</div><div class="lbl">Seit dem Jahr</div></div>
-    <div class="stat"><div class="num" data-to="1" data-suf="">0</div><div class="lbl">Mitarbeiter aus Fleisch</div></div>
+    <div class="stat"><div class="num" data-to="40" data-suf="+">0</div><div class="lbl" data-i="st1"></div></div>
+    <div class="stat"><div class="num" data-to="5" data-suf="">0</div><div class="lbl" data-i="st2"></div></div>
+    <div class="stat"><div class="num" data-to="1986" data-suf="">0</div><div class="lbl" data-i="st3"></div></div>
+    <div class="stat"><div class="num" data-to="1" data-suf="">0</div><div class="lbl" data-i="st4"></div></div>
   </div>
-  <p class="lead rv" style="margin-top:1.6rem">Restaurants, Zahnarztpraxen, eine Metzgerei, ein Olivenöl-Shop, ein Werkstatt-System, eine Warteliste-App für Therapiepraxen, ein IT-Verwaltungs-Portal. Alles läuft. Gleichzeitig. Auf demselben Laptop entstanden.</p>
+  <p class="lead rv" style="margin-top:1.6rem" data-i="l2"></p>
 </section>
 
-<!-- PIPELINE -->
 <section>
   <div class="rv">
-    <div class="kick">Kapitel 3 · Der Ablauf</div>
-    <h2>Von der Idee bis <em>online</em>:<br>ungefähr eine Folge Serie.</h2>
-    <p class="lead">Klassische Agentur: Angebot, Konzeptphase, Freigabeschleife, Rückfrage, Urlaub des Projektleiters, sechs Wochen. Hier sieht das etwas anders aus.</p>
+    <div class="kick" data-i="k3"></div>
+    <h2 data-i="h2_3"></h2>
+    <p class="lead" data-i="l3"></p>
   </div>
   <div class="pipe rv" id="pipe">
     <div class="pipe-fill" id="pf"></div>
-    <div class="step"><div class="t">00:00</div><h4>Die Idee</h4><p>Meist im Auto, unter der Dusche oder um 23:47 Uhr, wenn eigentlich Schlafenszeit wäre.</p></div>
-    <div class="step"><div class="t">00:02</div><h4>Der Satz</h4><p>Hamdi tippt: „Mach mir dies und das." Manchmal mit Tippfehler. Das System versteht es trotzdem.</p></div>
-    <div class="step"><div class="t">00:09</div><h4>Der Code</h4><p>Die Agenten bauen. Design, Texte, Datenbank, Formular, Impressum. Alles auf einmal.</p></div>
-    <div class="step"><div class="t">00:11</div><h4>Der Deploy</h4><p>Ein Befehl. GitHub speichert, Cloudflare verteilt weltweit. Kein FTP, kein Server, kein Praktikant.</p></div>
-    <div class="step"><div class="t">00:12</div><h4>Live.</h4><p>Die Seite ist online. In Vaihingen, in Istanbul, in Tokio. Gleich schnell. Und Hamdi geht endlich schlafen. Vermutlich.</p></div>
+    <div class="step"><div class="t">00:00</div><h4 data-i="p1h"></h4><p data-i="p1p"></p></div>
+    <div class="step"><div class="t">00:02</div><h4 data-i="p2h"></h4><p data-i="p2p"></p></div>
+    <div class="step"><div class="t">00:09</div><h4 data-i="p3h"></h4><p data-i="p3p"></p></div>
+    <div class="step"><div class="t">00:11</div><h4 data-i="p4h"></h4><p data-i="p4p"></p></div>
+    <div class="step"><div class="t">00:12</div><h4 data-i="p5h"></h4><p data-i="p5p"></p></div>
   </div>
-  <div class="code rv">
-<span class="c"># so sieht das in echt aus, Alesya</span>
-<span class="k">$</span> git push <span class="c">// merk dir alles</span>
-<span class="k">$</span> wrangler deploy <span class="c">// schick es in die Welt</span>
-<span class="s">✔ Deployment abgeschlossen</span> <span class="c">(2,4 Sekunden)</span>
-<span class="s">✔ 330 Standorte aktualisiert</span>
-<span class="w">⚠ Warnung: es ist wieder halb eins nachts</span>
-</div>
+  <div class="code rv" data-i="code"></div>
 </section>
 
-<!-- PROJEKTE -->
 <section>
   <div class="rv">
-    <div class="kick">Kapitel 4 · Beweisstücke</div>
-    <h2>Dinge, die es <em>wirklich</em> gibt.</h2>
-    <p class="lead">Alles echte Kunden, echte Bestellungen, echte Termine, echte Rechnungen. Nichts davon ist eine Präsentation.</p>
+    <div class="kick" data-i="k4"></div>
+    <h2 data-i="h2_4"></h2>
+    <p class="lead" data-i="l4"></p>
   </div>
   <div class="grid g3">
-    <div class="card rv"><span class="ico">🥙</span><h3>Enz Kebap</h3><p>Ein Restaurant bestellt digital. Küche bekommt den Bon, Kunde bekommt Essen, niemand ruft mehr an.</p></div>
-    <div class="card rv"><span class="ico">🦷</span><h3>Praxmate</h3><p>Terminbuchung für Arztpraxen. Die deutsche Antwort auf die großen Portale — nur ohne monatliche Abzocke.</p></div>
-    <div class="card rv"><span class="ico">📱</span><h3>WarteListe Pro</h3><p>Echte App. Echter App Store. Echter Play Store. Man kann sie runterladen. Ohne Witz.</p></div>
-    <div class="card rv"><span class="ico">🛡️</span><h3>IT-Cockpit</h3><p>Zeigt Firmen, welcher Rechner Updates braucht, bevor der Rechner es selbst merkt.</p></div>
-    <div class="card rv"><span class="ico">🔧</span><h3>Hasi ERP</h3><p>Das Reparatursystem der Werkstatt. Läuft täglich. Wenn es ausfällt, merkt man es sofort. Es fällt nicht aus.</p></div>
-    <div class="card rv"><span class="ico">🫒</span><h3>Keby Shop</h3><p>Olivenöl online. Bezahlung, Versand, Lager. Ein kompletter Shop für einen einzigen Kunden.</p></div>
+    <div class="card rv"><span class="ico">🥙</span><h3>Enz Kebap</h3><p data-i="pr1"></p></div>
+    <div class="card rv"><span class="ico">🦷</span><h3>Praxmate</h3><p data-i="pr2"></p></div>
+    <div class="card rv"><span class="ico">📱</span><h3>WarteListe Pro</h3><p data-i="pr3"></p></div>
+    <div class="card rv"><span class="ico">🛡️</span><h3>IT-Cockpit</h3><p data-i="pr4"></p></div>
+    <div class="card rv"><span class="ico">🔧</span><h3>Hasi ERP</h3><p data-i="pr5"></p></div>
+    <div class="card rv"><span class="ico">🫒</span><h3>Keby Shop</h3><p data-i="pr6"></p></div>
   </div>
 </section>
 
-<!-- FAQ -->
 <section>
   <div class="rv">
-    <div class="kick">Kapitel 5 · Fragen, die du gleich stellen wolltest</div>
-    <h2>Alesya fragt. <em>Das System</em> antwortet.</h2>
+    <div class="kick" data-i="k5"></div>
+    <h2 data-i="h2_5"></h2>
   </div>
   <div class="faq rv">
-    <div class="q"><button>Also… ist das jetzt eine echte Firma?<span class="sign">+</span></button><div class="a"><p>Ja. Seit 1986 in Vaihingen an der Enz. Mit Ladengeschäft, Rechnungen, Steuernummer und allem Drumherum. Nur eben mit einem sehr ungewöhnlichen Personalschlüssel.</p></div></div>
-    <div class="q"><button>Und das schafft eine Person alleine?<span class="sign">+</span></button><div class="a"><p>Nicht alleine — nur ohne Angestellte. Der Unterschied ist entscheidend. Die Werkzeuge übernehmen alles, was wiederholbar ist. Der Mensch übernimmt alles, was Entscheidung ist.</p></div></div>
-    <div class="q"><button>Wo stehen die Server?<span class="sign">+</span></button><div class="a"><p>Überall und nirgends. Es gibt keinen Serverraum, keinen summenden Schrank, keinen Lüfter. Der Code liegt im Netzwerk von Cloudflare und wird dort ausgeführt, wo gerade jemand die Seite öffnet.</p></div></div>
-    <div class="q"><button>Was passiert, wenn etwas kaputtgeht?<span class="sign">+</span></button><div class="a"><p>Dann kommt eine Nachricht aufs Handy, bevor der Kunde es merkt. Und im schlimmsten Fall: ein Befehl, zurück zur letzten funktionierenden Version. Dauert weniger lang als dieser Satz.</p></div></div>
-    <div class="q"><button>Diese Seite hier — wie lange hat die gedauert?<span class="sign">+</span></button><div class="a"><p>Kürzer, als du zum Lesen gebraucht hast. Und ja, sie ist genauso deployed wie alles andere: GitHub, Cloudflare, weltweit, verschlüsselt. Für eine Seite, die exakt eine Person überzeugen soll. Dich.</p></div></div>
+    <div class="q"><button><span data-i="q1"></span><span class="sign">+</span></button><div class="a"><p data-i="a1"></p></div></div>
+    <div class="q"><button><span data-i="q2"></span><span class="sign">+</span></button><div class="a"><p data-i="a2"></p></div></div>
+    <div class="q"><button><span data-i="q3"></span><span class="sign">+</span></button><div class="a"><p data-i="a3"></p></div></div>
+    <div class="q"><button><span data-i="q4"></span><span class="sign">+</span></button><div class="a"><p data-i="a4"></p></div></div>
+    <div class="q"><button><span data-i="q5"></span><span class="sign">+</span></button><div class="a"><p data-i="a5"></p></div></div>
   </div>
 </section>
 
-<!-- FINALE -->
 <section class="finale">
   <div class="rv">
-    <div class="kick">Ende</div>
-    <h2>Und jetzt weißt du es,<br><em>Alesya.</em></h2>
-    <p class="lead" style="margin:0 auto 2.2rem">Kein Zauber. Kein Geheimnis. Nur ein System, das nie müde wird — und ein Mensch, der nicht darauf wartet, dass jemand anderes es für ihn baut.</p>
-    <button class="btn p" onclick="boom()">Okay, ich bin überzeugt 🎉</button>
+    <div class="kick" data-i="k6"></div>
+    <h2 data-i="h2_6"></h2>
+    <p class="lead" data-i="l6"></p>
+    <button class="btn p" onclick="boom()" data-i="cta3"></button>
   </div>
 </section>
 
 <footer>
   <strong>Hasi Elektronic</strong> · Grabenstraße 18 · 71665 Vaihingen an der Enz · seit 1986<br>
-  <a href="https://hasi-elektronic.de" target="_blank" rel="noopener">hasi-elektronic.de</a> — Diese Seite wurde von einem System gebaut, das keine Pause macht. Für Alesya. ⚡
+  <a href="https://hasi-elektronic.de" target="_blank" rel="noopener">hasi-elektronic.de</a> — <span data-i="foot"></span>
 </footer>
 
 <script>
+var I18N={
+de:{
+ title:"Alesya, so funktioniert das System — Hasi Elektronic",
+ term:"hasi@elektronic — erklaerung-fuer-alesya.sh",
+ skip:"überspringen →",
+ boot:["<span>$</span> ./erklaerung-fuer-alesya.sh --modus=ehrlich","Lade System-Erklärung …","Mitarbeiter gefunden: <b>1</b> (Mensch)","Mitarbeiter gefunden: <b>∞</b> (nicht Mensch)","Serverraum gesucht … <b>nicht vorhanden</b> ✔","Ausreden gesucht … <b>keine gefunden</b> ✔","Skepsis-Level von Alesya: <b>hoch</b>","Gegenmaßnahme: diese Website","<b>Bereit.</b> Viel Spaß."],
+ nav:"System läuft. Immer noch.",
+ badge:"👋 Diese Seite wurde gebaut, nur um dir etwas zu erklären",
+ h1:"Alesya,<br>das hier ist<br><span class='nm'>das System.</span>",
+ pre:"Es besteht aus",
+ rot:["einem Mann.","sehr viel Kaffee.","ein paar KI-Agenten.","Cloudflare.","Nächten ohne Schlaf.","Ideen um 23:47 Uhr."],
+ heroP:"Keine Firma mit 40 Mitarbeitern. Kein Großraumbüro. Kein Meeting über das nächste Meeting. Nur ein Laptop, ein Netzwerk aus Werkzeugen — und die feste Überzeugung, dass Warten auf jemand anderen Zeitverschwendung ist.",
+ cta1:"Zeig mir das Team →", cta2:"Ich glaub das nicht 🎉", hint:"↓ runterscrollen · es wird schlimmer",
+ mq:["Cloudflare Workers","GitHub","KI-Agenten","D1 Datenbank","Kein Serverraum","Kein Meeting","Deploy in 12 Minuten","Vaihingen an der Enz","seit 1986","Kaffee","Nachtschicht","40+ Projekte live"],
+ k1:"Kapitel 1 · Die Belegschaft", h2_1:"Das komplette Team.<br><em>Vollständig.</em> Alle da.",
+ l1:"Kein Personalmangel — es ist einfach von Anfang an so geplant gewesen. Die Weihnachtsfeier ist trotzdem gut besucht, weil drei davon keinen Platz brauchen.",
+ t1r:"Geschäftsführer, Entwickler, Support, Buchhaltung, Putzkraft", t1h:"Hamdi",
+ t1p:"Repariert vormittags einen PC, baut mittags eine SaaS-Plattform, schreibt abends eine Rechnung. Schläft angeblich auch. Unbestätigt.",
+ t2r:"Abteilung: alles, was tippen muss", t2h:"Die KI-Agenten",
+ t2p:"Schreiben Code, Texte, Angebote und diese Website hier. Beschweren sich nie über Überstunden. Wollen kein Urlaubsgeld. Verlangen dafür sehr präzise Sätze.",
+ t3r:"Abteilung: Serverraum (existiert nicht)", t3h:"Cloudflare",
+ t3p:"330 Rechenzentren weltweit. Deine Seite wird von dem Server geladen, der dir am nächsten ist. Kostet weniger als ein Döner im Monat. Ja, wirklich.",
+ t4r:"Abteilung: Gedächtnis", t4h:"GitHub",
+ t4p:"Merkt sich jede einzelne Änderung seit Tag eins. Wenn etwas kaputtgeht: einen Knopf drücken, zurück in die Vergangenheit. Wie Strg+Z, nur für ein ganzes Unternehmen.",
+ k2:"Kapitel 2 · Zahlen, die niemand geglaubt hat", h2_2:"Ein bisschen <em>Angeberei</em>. Nur ganz kurz.",
+ st1:"Live-Projekte", st2:"Apps im Store", st3:"Seit dem Jahr", st4:"Mitarbeiter aus Fleisch",
+ l2:"Restaurants, Zahnarztpraxen, eine Metzgerei, ein Olivenöl-Shop, ein Werkstatt-System, eine Warteliste-App für Therapiepraxen, ein IT-Verwaltungs-Portal. Alles läuft. Gleichzeitig. Auf demselben Laptop entstanden.",
+ k3:"Kapitel 3 · Der Ablauf", h2_3:"Von der Idee bis <em>online</em>:<br>ungefähr eine Folge Serie.",
+ l3:"Klassische Agentur: Angebot, Konzeptphase, Freigabeschleife, Rückfrage, Urlaub des Projektleiters, sechs Wochen. Hier sieht das etwas anders aus.",
+ p1h:"Die Idee", p1p:"Meist im Auto, unter der Dusche oder um 23:47 Uhr, wenn eigentlich Schlafenszeit wäre.",
+ p2h:"Der Satz", p2p:"Hamdi tippt: „Mach mir dies und das.“ Manchmal mit Tippfehler. Das System versteht es trotzdem.",
+ p3h:"Der Code", p3p:"Die Agenten bauen. Design, Texte, Datenbank, Formular, Impressum. Alles auf einmal.",
+ p4h:"Der Deploy", p4p:"Ein Befehl. GitHub speichert, Cloudflare verteilt weltweit. Kein FTP, kein Server, kein Praktikant.",
+ p5h:"Live.", p5p:"Die Seite ist online. In Vaihingen, in Istanbul, in Tokio. Gleich schnell. Und Hamdi geht endlich schlafen. Vermutlich.",
+ code:"<span class='c'># so sieht das in echt aus, Alesya</span>\n<span class='k'>$</span> git push <span class='c'>// merk dir alles</span>\n<span class='k'>$</span> wrangler deploy <span class='c'>// schick es in die Welt</span>\n<span class='s'>✔ Deployment abgeschlossen</span> <span class='c'>(2,4 Sekunden)</span>\n<span class='s'>✔ 330 Standorte aktualisiert</span>\n<span class='w'>⚠ Warnung: es ist wieder halb eins nachts</span>",
+ k4:"Kapitel 4 · Beweisstücke", h2_4:"Dinge, die es <em>wirklich</em> gibt.",
+ l4:"Alles echte Kunden, echte Bestellungen, echte Termine, echte Rechnungen. Nichts davon ist eine Präsentation.",
+ pr1:"Ein Restaurant bestellt digital. Küche bekommt den Bon, Kunde bekommt Essen, niemand ruft mehr an.",
+ pr2:"Terminbuchung für Arztpraxen. Die deutsche Antwort auf die großen Portale — nur ohne monatliche Abzocke.",
+ pr3:"Echte App. Echter App Store. Echter Play Store. Man kann sie runterladen. Ohne Witz.",
+ pr4:"Zeigt Firmen, welcher Rechner Updates braucht, bevor der Rechner es selbst merkt.",
+ pr5:"Das Reparatursystem der Werkstatt. Läuft täglich. Wenn es ausfällt, merkt man es sofort. Es fällt nicht aus.",
+ pr6:"Olivenöl online. Bezahlung, Versand, Lager. Ein kompletter Shop für einen einzigen Kunden.",
+ k5:"Kapitel 5 · Fragen, die du gleich stellen wolltest", h2_5:"Alesya fragt. <em>Das System</em> antwortet.",
+ q1:"Also… ist das jetzt eine echte Firma?", a1:"Ja. Seit 1986 in Vaihingen an der Enz. Mit Ladengeschäft, Rechnungen, Steuernummer und allem Drumherum. Nur eben mit einem sehr ungewöhnlichen Personalschlüssel.",
+ q2:"Und das schafft eine Person alleine?", a2:"Nicht alleine — nur ohne Angestellte. Der Unterschied ist entscheidend. Die Werkzeuge übernehmen alles, was wiederholbar ist. Der Mensch übernimmt alles, was Entscheidung ist.",
+ q3:"Wo stehen die Server?", a3:"Überall und nirgends. Es gibt keinen Serverraum, keinen summenden Schrank, keinen Lüfter. Der Code liegt im Netzwerk von Cloudflare und wird dort ausgeführt, wo gerade jemand die Seite öffnet.",
+ q4:"Was passiert, wenn etwas kaputtgeht?", a4:"Dann kommt eine Nachricht aufs Handy, bevor der Kunde es merkt. Und im schlimmsten Fall: ein Befehl, zurück zur letzten funktionierenden Version. Dauert weniger lang als dieser Satz.",
+ q5:"Diese Seite hier — wie lange hat die gedauert?", a5:"Kürzer, als du zum Lesen gebraucht hast. Und ja, sie ist genauso deployed wie alles andere: GitHub, Cloudflare, weltweit, verschlüsselt. Für eine Seite, die exakt eine Person überzeugen soll. Dich.",
+ k6:"Ende", h2_6:"Und jetzt weißt du es,<br><em>Alesya.</em>",
+ l6:"Kein Zauber. Kein Geheimnis. Nur ein System, das nie müde wird — und ein Mensch, der nicht darauf wartet, dass jemand anderes es für ihn baut.",
+ cta3:"Okay, ich bin überzeugt 🎉",
+ foot:"Diese Seite wurde von einem System gebaut, das keine Pause macht. Für Alesya. ⚡"
+},
+tr:{
+ title:"Alesya, sistem böyle çalışıyor — Hasi Elektronic",
+ term:"hasi@elektronic — alesya-icin-aciklama.sh",
+ skip:"geç →",
+ boot:["<span>$</span> ./alesya-icin-aciklama.sh --mod=durust","Sistem açıklaması yükleniyor …","Çalışan bulundu: <b>1</b> (insan)","Çalışan bulundu: <b>∞</b> (insan değil)","Sunucu odası aranıyor … <b>yok</b> ✔","Bahane aranıyor … <b>bulunamadı</b> ✔","Alesya şüphe seviyesi: <b>yüksek</b>","Karşı önlem: bu web sitesi","<b>Hazır.</b> İyi eğlenceler."],
+ nav:"Sistem çalışıyor. Hâlâ.",
+ badge:"👋 Bu sayfa sadece sana bir şey anlatmak için yapıldı",
+ h1:"Alesya,<br>işte bu<br><span class='nm'>sistem.</span>",
+ pre:"Şunlardan oluşuyor:",
+ rot:["bir adam.","çok fazla kahve.","birkaç yapay zekâ ajanı.","Cloudflare.","uykusuz geceler.","gece 23:47 fikirleri."],
+ heroP:"40 kişilik bir şirket yok. Açık ofis yok. Bir sonraki toplantıyı planlamak için toplantı yok. Sadece bir laptop, bir araç ağı — ve başkasını beklemenin zaman kaybı olduğuna dair sağlam bir inanç.",
+ cta1:"Ekibi göster →", cta2:"Buna inanmıyorum 🎉", hint:"↓ aşağı kaydır · daha da beteri var",
+ mq:["Cloudflare Workers","GitHub","Yapay zekâ ajanları","D1 veritabanı","Sunucu odası yok","Toplantı yok","12 dakikada yayında","Vaihingen an der Enz","1986'dan beri","Kahve","Gece vardiyası","40+ canlı proje"],
+ k1:"Bölüm 1 · Kadro", h2_1:"Tüm ekip burada.<br><em>Eksiksiz.</em> Herkes tamam.",
+ l1:"Personel sıkıntısı yok — baştan beri böyle planlandı. Yılbaşı yemeği yine de kalabalık geçiyor, çünkü üçü yer kaplamıyor.",
+ t1r:"Genel müdür, yazılımcı, destek, muhasebe, temizlik", t1h:"Hamdi",
+ t1p:"Sabah bilgisayar tamir eder, öğlen SaaS platformu kurar, akşam fatura yazar. Uyuduğu da söyleniyor. Doğrulanmadı.",
+ t2r:"Departman: klavyeye dokunan her şey", t2h:"Yapay zekâ ajanları",
+ t2p:"Kod yazar, metin yazar, teklif hazırlar, bu siteyi de onlar yaptı. Fazla mesaiden şikâyet etmez. İzin parası istemez. Karşılığında sadece net cümleler ister.",
+ t3r:"Departman: sunucu odası (yok)", t3h:"Cloudflare",
+ t3p:"Dünyada 330 veri merkezi. Site sana en yakın sunucudan açılır. Aylık maliyeti bir dönerden az. Evet, gerçekten.",
+ t4r:"Departman: hafıza", t4h:"GitHub",
+ t4p:"İlk günden beri her değişikliği hatırlar. Bir şey bozulursa: tek tuş, geçmişe dön. Ctrl+Z gibi, ama tüm şirket için.",
+ k2:"Bölüm 2 · Kimsenin inanmadığı rakamlar", h2_2:"Birazcık <em>hava atma</em>. Çok kısa.",
+ st1:"Canlı proje", st2:"Store'da uygulama", st3:"Kuruluş yılı", st4:"Etten kemikten çalışan",
+ l2:"Restoranlar, diş hekimi muayenehaneleri, bir kasap, bir zeytinyağı mağazası, bir servis takip sistemi, terapi merkezleri için bekleme listesi uygulaması, bir IT yönetim portalı. Hepsi çalışıyor. Aynı anda. Hepsi aynı laptopta doğdu.",
+ k3:"Bölüm 3 · Akış", h2_3:"Fikirden <em>yayına</em>:<br>yaklaşık bir dizi bölümü.",
+ l3:"Klasik ajans: teklif, konsept aşaması, onay turu, geri soru, proje müdürünün tatili, altı hafta. Burada işler biraz farklı yürüyor.",
+ p1h:"Fikir", p1p:"Genelde arabada, duşta ya da gece 23:47'de — yani aslında uyuma vaktinde.",
+ p2h:"Cümle", p2p:"Hamdi yazar: „Şunu şöyle yap.“ Bazen yazım hatasıyla. Sistem yine de anlar.",
+ p3h:"Kod", p3p:"Ajanlar inşa eder. Tasarım, metin, veritabanı, form, künye. Hepsi aynı anda.",
+ p4h:"Deploy", p4p:"Tek komut. GitHub kaydeder, Cloudflare dünyaya dağıtır. FTP yok, sunucu yok, stajyer yok.",
+ p5h:"Yayında.", p5p:"Site açıldı. Vaihingen'de, İstanbul'da, Tokyo'da. Aynı hızda. Ve Hamdi nihayet uyumaya gider. Muhtemelen.",
+ code:"<span class='c'># gerçekte şöyle görünüyor Alesya</span>\n<span class='k'>$</span> git push <span class='c'>// her şeyi hatırla</span>\n<span class='k'>$</span> wrangler deploy <span class='c'>// dünyaya gönder</span>\n<span class='s'>✔ Yayınlama tamamlandı</span> <span class='c'>(2,4 saniye)</span>\n<span class='s'>✔ 330 lokasyon güncellendi</span>\n<span class='w'>⚠ Uyarı: saat yine gece yarısını geçti</span>",
+ k4:"Bölüm 4 · Kanıtlar", h2_4:"<em>Gerçekten</em> var olan şeyler.",
+ l4:"Hepsi gerçek müşteri, gerçek sipariş, gerçek randevu, gerçek fatura. Hiçbiri sunum değil.",
+ pr1:"Restoran dijital sipariş alıyor. Mutfağa fiş düşer, müşteriye yemek gider, kimse telefonla uğraşmaz.",
+ pr2:"Muayenehaneler için randevu sistemi. Büyük portallara Alman cevabı — aylık soygun olmadan.",
+ pr3:"Gerçek uygulama. Gerçek App Store. Gerçek Play Store. İndirebilirsin. Şaka değil.",
+ pr4:"Firmalara hangi bilgisayarın güncelleme istediğini, bilgisayar fark etmeden söyler.",
+ pr5:"Atölyenin tamir sistemi. Her gün çalışıyor. Durursa hemen anlaşılır. Durmuyor.",
+ pr6:"Online zeytinyağı. Ödeme, kargo, stok. Tek bir müşteri için eksiksiz bir mağaza.",
+ k5:"Bölüm 5 · Birazdan soracağın sorular", h2_5:"Alesya sorar. <em>Sistem</em> cevaplar.",
+ q1:"Yani… bu gerçek bir şirket mi?", a1:"Evet. 1986'dan beri Vaihingen an der Enz'de. Dükkânı, faturası, vergi numarası, hepsi var. Sadece personel yapısı biraz alışılmadık.",
+ q2:"Bunu tek kişi mi yapıyor?", a2:"Tek başına değil — sadece çalışanı yok. Fark burada. Tekrarlanan her şeyi araçlar yapar. Karar gerektiren her şeyi insan yapar.",
+ q3:"Sunucular nerede?", a3:"Her yerde ve hiçbir yerde. Sunucu odası yok, uğuldayan dolap yok, fan yok. Kod Cloudflare ağında duruyor ve siteyi kim açtıysa ona en yakın yerde çalışıyor.",
+ q4:"Bir şey bozulursa ne olur?", a4:"Müşteri fark etmeden telefona bildirim düşer. En kötü ihtimalle: tek komut, son çalışan sürüme dönüş. Bu cümleyi okumaktan kısa sürüyor.",
+ q5:"Peki bu sayfa ne kadar sürdü?", a5:"Senin okuma süresinden kısa. Ve evet, diğer her şeyle aynı şekilde yayınlandı: GitHub, Cloudflare, dünya geneli, şifreli. Tam olarak tek bir kişiyi ikna etmesi gereken bir sayfa için. Seni.",
+ k6:"Son", h2_6:"Ve artık biliyorsun,<br><em>Alesya.</em>",
+ l6:"Sihir yok. Sır yok. Sadece hiç yorulmayan bir sistem — ve bunu başkası yapsın diye beklemeyen bir insan.",
+ cta3:"Tamam, ikna oldum 🎉",
+ foot:"Bu sayfa hiç mola vermeyen bir sistem tarafından yapıldı. Alesya için. ⚡"
+},
+ru:{
+ title:"Алеся, вот как работает система — Hasi Elektronic",
+ term:"hasi@elektronic — obyasnenie-dlya-alesi.sh",
+ skip:"пропустить →",
+ boot:["<span>$</span> ./obyasnenie-dlya-alesi.sh --режим=честный","Загрузка объяснения системы …","Найден сотрудник: <b>1</b> (человек)","Найдены сотрудники: <b>∞</b> (не люди)","Поиск серверной … <b>не найдена</b> ✔","Поиск отговорок … <b>не найдены</b> ✔","Уровень скепсиса Алеси: <b>высокий</b>","Контрмера: этот сайт","<b>Готово.</b> Приятного просмотра."],
+ nav:"Система работает. Всё ещё.",
+ badge:"👋 Этот сайт сделан только чтобы кое-что тебе объяснить",
+ h1:"Алеся,<br>вот это и есть<br><span class='nm'>система.</span>",
+ pre:"Она состоит из:",
+ rot:["одного человека.","очень большого количества кофе.","нескольких ИИ-агентов.","Cloudflare.","ночей без сна.","идей в 23:47."],
+ heroP:"Никакой компании из 40 человек. Никакого опенспейса. Никаких совещаний о будущих совещаниях. Только ноутбук, сеть инструментов — и твёрдая уверенность, что ждать кого-то другого значит терять время.",
+ cta1:"Покажи команду →", cta2:"Я в это не верю 🎉", hint:"↓ листай вниз · дальше хуже",
+ mq:["Cloudflare Workers","GitHub","ИИ-агенты","База данных D1","Нет серверной","Нет совещаний","Деплой за 12 минут","Файхинген-ан-дер-Энц","с 1986 года","Кофе","Ночная смена","40+ проектов в работе"],
+ k1:"Глава 1 · Штат", h2_1:"Вся команда в сборе.<br><em>Полностью.</em> Все на месте.",
+ l1:"Нехватки кадров нет — так и было задумано с самого начала. Корпоратив всё равно проходит бодро: трое из них не занимают места.",
+ t1r:"Директор, разработчик, поддержка, бухгалтерия, уборщик", t1h:"Хамди",
+ t1p:"Утром чинит компьютер, днём строит SaaS-платформу, вечером выставляет счёт. Говорят, он ещё и спит. Не подтверждено.",
+ t2r:"Отдел: всё, что надо печатать", t2h:"ИИ-агенты",
+ t2p:"Пишут код, тексты, коммерческие предложения и этот сайт. Никогда не жалуются на переработки. Не просят отпускных. Взамен требуют очень точных формулировок.",
+ t3r:"Отдел: серверная (не существует)", t3h:"Cloudflare",
+ t3p:"330 дата-центров по всему миру. Сайт грузится с ближайшего к тебе сервера. Стоит меньше, чем шаурма в месяц. Да, серьёзно.",
+ t4r:"Отдел: память", t4h:"GitHub",
+ t4p:"Помнит каждое изменение с первого дня. Если что-то сломалось: одна кнопка — и ты в прошлом. Как Ctrl+Z, только для целой фирмы.",
+ k2:"Глава 2 · Цифры, в которые никто не поверил", h2_2:"Немного <em>хвастовства</em>. Совсем чуть-чуть.",
+ st1:"Проектов в работе", st2:"Приложений в сторах", st3:"Год основания", st4:"Сотрудник из плоти",
+ l2:"Рестораны, стоматологии, мясная лавка, магазин оливкового масла, система учёта ремонтов, приложение-лист ожидания для терапевтических практик, портал управления IT. Всё работает. Одновременно. Всё родилось на одном ноутбуке.",
+ k3:"Глава 3 · Процесс", h2_3:"От идеи до <em>публикации</em>:<br>примерно одна серия сериала.",
+ l3:"Классическое агентство: смета, этап концепции, круг согласований, встречный вопрос, отпуск руководителя проекта, шесть недель. Здесь это выглядит немного иначе.",
+ p1h:"Идея", p1p:"Обычно в машине, в душе или в 23:47, когда вообще-то пора спать.",
+ p2h:"Фраза", p2p:"Хамди пишет: «Сделай мне вот так». Иногда с опечаткой. Система всё равно понимает.",
+ p3h:"Код", p3p:"Агенты строят. Дизайн, тексты, база данных, форма, выходные данные. Всё сразу.",
+ p4h:"Деплой", p4p:"Одна команда. GitHub сохраняет, Cloudflare раздаёт по всему миру. Ни FTP, ни сервера, ни стажёра.",
+ p5h:"В эфире.", p5p:"Сайт онлайн. В Файхингене, в Стамбуле, в Токио. Одинаково быстро. И Хамди наконец идёт спать. Наверное.",
+ code:"<span class='c'># вот как это выглядит на самом деле, Алеся</span>\n<span class='k'>$</span> git push <span class='c'>// запомни всё</span>\n<span class='k'>$</span> wrangler deploy <span class='c'>// отправь в мир</span>\n<span class='s'>✔ Публикация завершена</span> <span class='c'>(2,4 секунды)</span>\n<span class='s'>✔ Обновлено 330 локаций</span>\n<span class='w'>⚠ Внимание: снова половина первого ночи</span>",
+ k4:"Глава 4 · Вещественные доказательства", h2_4:"Вещи, которые <em>действительно</em> существуют.",
+ l4:"Настоящие клиенты, настоящие заказы, настоящие записи, настоящие счета. Ничего из этого не презентация.",
+ pr1:"Ресторан принимает заказы онлайн. На кухню падает чек, гость получает еду, никто больше не звонит.",
+ pr2:"Запись на приём для врачебных практик. Немецкий ответ большим порталам — только без ежемесячного грабежа.",
+ pr3:"Настоящее приложение. Настоящий App Store. Настоящий Play Store. Его можно скачать. Без шуток.",
+ pr4:"Показывает фирмам, какому компьютеру нужны обновления, раньше, чем это заметит сам компьютер.",
+ pr5:"Система учёта ремонтов мастерской. Работает каждый день. Если встанет — заметят сразу. Она не встаёт.",
+ pr6:"Оливковое масло онлайн. Оплата, доставка, склад. Полноценный магазин для одного клиента.",
+ k5:"Глава 5 · Вопросы, которые ты сейчас задашь", h2_5:"Алеся спрашивает. <em>Система</em> отвечает.",
+ q1:"То есть… это настоящая фирма?", a1:"Да. С 1986 года в Файхингене-ан-дер-Энц. С магазином, счетами, налоговым номером и всем полагающимся. Просто с очень необычным штатным расписанием.",
+ q2:"И это тянет один человек?", a2:"Не в одиночку — просто без наёмных сотрудников. Разница принципиальная. Инструменты берут на себя всё повторяющееся. Человек берёт на себя всё, что требует решения.",
+ q3:"А где стоят серверы?", a3:"Везде и нигде. Нет серверной, нет гудящего шкафа, нет вентиляторов. Код лежит в сети Cloudflare и выполняется там, где кто-то сейчас открыл сайт.",
+ q4:"А если что-то сломается?", a4:"Уведомление приходит на телефон раньше, чем это заметит клиент. В худшем случае: одна команда — и возврат к последней рабочей версии. Быстрее, чем ты прочитала это предложение.",
+ q5:"А эта страница — сколько заняла?", a5:"Меньше, чем ты потратила на чтение. И да, она опубликована точно так же, как всё остальное: GitHub, Cloudflare, по всему миру, с шифрованием. Ради страницы, которая должна убедить ровно одного человека. Тебя.",
+ k6:"Конец", h2_6:"И теперь ты знаешь,<br><em>Алеся.</em>",
+ l6:"Никакой магии. Никакого секрета. Просто система, которая не устаёт — и человек, который не ждёт, пока кто-то сделает это за него.",
+ cta3:"Ладно, убедил 🎉",
+ foot:"Этот сайт построила система, которая не делает пауз. Для Алеси. ⚡"
+}};
+
+var LANG="de",D=I18N.de,rotTimer=null,rotIdx=0;
+
+function apply(){
+  D=I18N[LANG];
+  document.documentElement.lang=LANG;
+  document.title=D.title;
+  document.getElementById("termTitle").textContent=D.term;
+  document.getElementById("skipBtn").textContent=D.skip;
+  document.querySelectorAll("[data-i]").forEach(function(el){
+    var v=D[el.dataset.i]; if(v!==undefined) el.innerHTML=v;
+  });
+  document.querySelectorAll(".langs button").forEach(function(b){b.classList.toggle("on",b.dataset.l===LANG);});
+  // rotator
+  var r=document.getElementById("rot");
+  r.innerHTML=D.rot.map(function(w,i){return "<span"+(i===0?" class='on'":"")+">"+w+"</span>";}).join("");
+  rotIdx=0;
+  if(rotTimer)clearInterval(rotTimer);
+  rotTimer=setInterval(function(){
+    var rs=r.querySelectorAll("span");
+    rs[rotIdx].classList.remove("on");rotIdx=(rotIdx+1)%rs.length;rs[rotIdx].classList.add("on");
+  },2100);
+  // marquee
+  var h=D.mq.map(function(w){return "<span><b>◆</b> "+w+"</span>";}).join("");
+  document.getElementById("mq").innerHTML=h+h;
+  // close faq (heights change)
+  document.querySelectorAll(".q").forEach(function(q){q.classList.remove("open");q.querySelector(".a").style.maxHeight=null;});
+}
+function setLang(l,fromBoot){
+  LANG=l; try{localStorage.setItem("alesya_lang",l);}catch(e){}
+  apply();
+  if(fromBoot){restartBoot();}
+}
+try{var sv=localStorage.getItem("alesya_lang");if(sv&&I18N[sv])LANG=sv;}catch(e){}
+if(!(function(){try{return localStorage.getItem("alesya_lang");}catch(e){return null;}})()){
+  var nl=(navigator.language||"de").slice(0,2);
+  if(nl==="tr")LANG="tr"; else if(nl==="ru"||nl==="uk")LANG="ru";
+}
+apply();
+
 /* BOOT */
-var lines=[
- '<span>$</span> ./erklaerung-fuer-alesya.sh --modus=ehrlich',
- 'Lade System-Erklärung …',
- 'Mitarbeiter gefunden: <b>1</b> (Mensch)',
- 'Mitarbeiter gefunden: <b>∞</b> (nicht Mensch)',
- 'Serverraum gesucht … <b>nicht vorhanden</b> ✔',
- 'Ausreden gesucht … <b>keine gefunden</b> ✔',
- 'Skepsis-Level von Alesya: <b>hoch</b>',
- 'Gegenmaßnahme: diese Website',
- '<b>Bereit.</b> Viel Spaß.'
-];
-var tb=document.getElementById('tb'),li=0,ci=0,cur='',bootDead=false;
-function type(){
-  if(bootDead)return;
+var tb=document.getElementById("tb"),li=0,ci=0,cur="",bootDead=false,bootRun=0;
+function type(run){
+  if(bootDead||run!==bootRun)return;
+  var lines=D.boot;
   if(li>=lines.length){setTimeout(killBoot,750);return;}
   var raw=lines[li];
   if(ci<=raw.length){
     var seg=raw.slice(0,ci);
     var open=(seg.match(/</g)||[]).length!==(seg.match(/>/g)||[]).length;
-    if(!open) cur=seg;
-    tb.innerHTML=lines.slice(0,li).join('<br>')+(li?'<br>':'')+cur+'<i class="cursor"></i>';
-    ci++;setTimeout(type,raw[ci-1]==='>'?0:18);
-  }else{li++;ci=0;cur='';setTimeout(type,240);}
+    if(!open)cur=seg;
+    tb.innerHTML=lines.slice(0,li).join("<br>")+(li?"<br>":"")+cur+'<i class="cursor"></i>';
+    ci++;setTimeout(function(){type(run);},raw[ci-1]===">"?0:18);
+  }else{li++;ci=0;cur="";setTimeout(function(){type(run);},240);}
 }
-function killBoot(){bootDead=true;document.getElementById('boot').classList.add('done');document.body.classList.remove('lock');}
-setTimeout(type,420);
-setTimeout(function(){if(!bootDead)killBoot();},13000);
-
-/* ROTATOR */
-var rs=document.querySelectorAll('#rot span'),ri=0;
-setInterval(function(){rs[ri].classList.remove('on');ri=(ri+1)%rs.length;rs[ri].classList.add('on');},2100);
-
-/* MARQUEE */
-var words=['Cloudflare Workers','GitHub','KI-Agenten','D1 Datenbank','Kein Serverraum','Kein Meeting','Deploy in 12 Minuten','Vaihingen an der Enz','seit 1986','Kaffee','Nachtschicht','40+ Projekte live'];
-var mqHtml=words.map(function(w){return '<span><b>◆</b> '+w+'</span>';}).join('');
-document.getElementById('mq').innerHTML=mqHtml+mqHtml;
+function restartBoot(){bootRun++;li=0;ci=0;cur="";tb.innerHTML="";type(bootRun);}
+function killBoot(){bootDead=true;document.getElementById("boot").classList.add("done");document.body.classList.remove("lock");}
+setTimeout(function(){type(bootRun);},420);
+setTimeout(function(){if(!bootDead)killBoot();},16000);
 
 /* REVEAL */
-var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.14});
-document.querySelectorAll('.rv').forEach(function(el,i){el.style.transitionDelay=(i%4*70)+'ms';io.observe(el);});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});},{threshold:.14});
+document.querySelectorAll(".rv").forEach(function(el,i){el.style.transitionDelay=(i%4*70)+"ms";io.observe(el);});
 
 /* COUNTER */
 var cio=new IntersectionObserver(function(es){es.forEach(function(e){
   if(!e.isIntersecting)return;cio.unobserve(e.target);
-  var el=e.target,to=+el.dataset.to,suf=el.dataset.suf||'',st=performance.now(),d=1500;
-  (function tick(t){var p=Math.min((t-st)/d,1);var v=Math.floor((1-Math.pow(1-p,3))*to);el.textContent=v+(p===1?suf:'');if(p<1)requestAnimationFrame(tick);})(st);
+  var el=e.target,to=+el.dataset.to,suf=el.dataset.suf||"",st=performance.now(),d=1500;
+  (function tick(t){var p=Math.min((t-st)/d,1);var v=Math.floor((1-Math.pow(1-p,3))*to);el.textContent=v+(p===1?suf:"");if(p<1)requestAnimationFrame(tick);})(st);
 });},{threshold:.5});
-document.querySelectorAll('.num').forEach(function(n){cio.observe(n);});
+document.querySelectorAll(".num").forEach(function(n){cio.observe(n);});
 
 /* PIPELINE */
 var pio=new IntersectionObserver(function(es){es.forEach(function(e){
   if(!e.isIntersecting)return;pio.unobserve(e.target);
-  document.getElementById('pf').style.height='calc(100% - 16px)';
-  document.querySelectorAll('.step').forEach(function(s,i){setTimeout(function(){s.classList.add('on');},i*320);});
+  document.getElementById("pf").style.height="calc(100% - 16px)";
+  document.querySelectorAll(".step").forEach(function(s,i){setTimeout(function(){s.classList.add("on");},i*320);});
 });},{threshold:.25});
-pio.observe(document.getElementById('pipe'));
+pio.observe(document.getElementById("pipe"));
 
 /* FAQ */
-document.querySelectorAll('.q button').forEach(function(b){
-  b.addEventListener('click',function(){
-    var q=b.parentElement,a=q.querySelector('.a'),open=q.classList.contains('open');
-    document.querySelectorAll('.q').forEach(function(x){x.classList.remove('open');x.querySelector('.a').style.maxHeight=null;});
-    if(!open){q.classList.add('open');a.style.maxHeight=a.scrollHeight+'px';}
+document.querySelectorAll(".q button").forEach(function(b){
+  b.addEventListener("click",function(){
+    var q=b.parentElement,a=q.querySelector(".a"),open=q.classList.contains("open");
+    document.querySelectorAll(".q").forEach(function(x){x.classList.remove("open");x.querySelector(".a").style.maxHeight=null;});
+    if(!open){q.classList.add("open");a.style.maxHeight=a.scrollHeight+"px";}
   });
 });
 
 /* CARD GLOW */
-document.querySelectorAll('.card').forEach(function(c){
-  c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px');});
+document.querySelectorAll(".card").forEach(function(c){
+  c.addEventListener("mousemove",function(e){var r=c.getBoundingClientRect();c.style.setProperty("--mx",(e.clientX-r.left)+"px");c.style.setProperty("--my",(e.clientY-r.top)+"px");});
 });
 
 /* PROGRESS + PARALLAX */
-var p=document.getElementById('prog'),b1=document.querySelector('.b1'),b2=document.querySelector('.b2');
-window.addEventListener('scroll',function(){
+var p=document.getElementById("prog"),b1=document.querySelector(".b1"),b2=document.querySelector(".b2");
+window.addEventListener("scroll",function(){
   var y=window.scrollY,h=document.body.scrollHeight-innerHeight;
-  p.style.width=(y/h*100)+'%';
-  b1.style.transform='translateY('+y*.22+'px)';
-  b2.style.transform='translateY('+(-y*.14)+'px)';
+  p.style.width=(y/h*100)+"%";
+  b1.style.transform="translateY("+y*.22+"px)";
+  b2.style.transform="translateY("+(-y*.14)+"px)";
 },{passive:true});
 
-/* FLOATING EMOJIS */
-['⚡','☁️','🤖','💻','🔧','🚀','🥙','🦷','📱'].forEach(function(e,i){
-  var s=document.createElement('div');s.className='emo';s.textContent=e;
-  s.style.left=(6+i*11)+'%';s.style.animationDuration=(16+i*3)+'s';s.style.animationDelay=(-i*3)+'s';
+/* EMOJIS */
+["⚡","☁️","🤖","💻","🔧","🚀","🥙","🦷","📱"].forEach(function(e,i){
+  var s=document.createElement("div");s.className="emo";s.textContent=e;
+  s.style.left=(6+i*11)+"%";s.style.animationDuration=(16+i*3)+"s";s.style.animationDelay=(-i*3)+"s";
   document.body.appendChild(s);
 });
 
 /* CONFETTI */
 function boom(){
-  var cols=['#33afe2','#7b5cff','#5ce6a5','#ffcc4d','#ff6b8a','#ffffff'];
+  var cols=["#33afe2","#7b5cff","#5ce6a5","#ffcc4d","#ff6b8a","#ffffff"];
   for(var i=0;i<130;i++){
     (function(){
-      var d=document.createElement('div');d.className='conf';
+      var d=document.createElement("div");d.className="conf";
       d.style.background=cols[i%cols.length];
-      d.style.left=(innerWidth/2)+'px';d.style.top=(innerHeight*.62)+'px';
+      d.style.left=(innerWidth/2)+"px";d.style.top=(innerHeight*.62)+"px";
       document.body.appendChild(d);
       var ang=Math.random()*Math.PI*2,sp=6+Math.random()*13,vx=Math.cos(ang)*sp,vy=Math.sin(ang)*sp-11,x=0,y=0,rot=0,life=0;
       (function f(){
         life++;vy+=.42;x+=vx;y+=vy;rot+=9;
-        d.style.transform='translate('+x+'px,'+y+'px) rotate('+rot+'deg)';
+        d.style.transform="translate("+x+"px,"+y+"px) rotate("+rot+"deg)";
         d.style.opacity=Math.max(0,1-life/95);
         if(life<95)requestAnimationFrame(f);else d.remove();
       })();
